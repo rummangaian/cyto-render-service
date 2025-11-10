@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { toCytoscapePayload } from "../core/transform.js";
 import { cytoSnap } from "../core/cyto-snap.js";
+import { centerSvg } from "../core/svg-center.js";
 import sampleDummy from "../../examples/by-id-dummy-request.json" with {type:'json'}
 
 type Body = { id: string; domain: string; dummy?: any };
@@ -15,10 +16,7 @@ export async function postRenderById(
   reply: FastifyReply
 ) {
   const { id, domain, dummy } = req.body || ({} as Body);
-  if (!id || !domain) {
-    reply.code(400).send({ error: "Provide 'id' and 'domain'." });
-    return;
-  }
+  if (!id || !domain) return reply.code(400).send({ error: "Provide 'id' and 'domain'." });
 
   const url = composeUrl(domain, id);
   const auth = req.headers["authorization"] ? String(req.headers["authorization"]) : undefined;
@@ -28,15 +26,14 @@ export async function postRenderById(
     const res = await fetch(url, { headers: auth ? { authorization: auth } : undefined });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     upstream = await res.json();
-  } catch (e) {
-    // if (!dummy) {
-    //   reply.code(502).send({ error: "Upstream fetch failed", url, details: String(e) });
-    //   return;
-    // }
-    upstream = sampleDummy; // testing fallback
+  } catch {
+    // if (!dummy) return reply.code(502).send({ error: "Upstream fetch failed", url });
+    upstream = sampleDummy;
   }
-
+// return upstream
   const cyPayload = toCytoscapePayload(upstream);
-  const svg = await cytoSnap(cyPayload);
-  reply.header("Content-Type", "image/svg+xml; charset=utf-8").send(svg);
+//   return cyPayload
+  const rawSvg = await cytoSnap(cyPayload);
+  const svg = centerSvg(rawSvg, 1000, 700, 24);
+  reply.type("image/svg+xml; charset=utf-8").send(svg);
 }
