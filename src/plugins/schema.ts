@@ -56,7 +56,7 @@ export default fp(async (app) => {
     $id: "ScienceNode",
     type: "object",
     properties: {
-      internalId: { oneOf: [{ type: "number" }, { type: "string" }] },
+      internalId: { type: ["number", "string"] },
       id: { type: "string" },
       labels: { type: "array", items: { type: "string" } },
       properties: { type: "object", additionalProperties: true }
@@ -69,10 +69,10 @@ export default fp(async (app) => {
     $id: "ScienceEdge",
     type: "object",
     properties: {
-      start: { oneOf: [{ type: "number" }, { type: "string" }] },
-      end: { oneOf: [{ type: "number" }, { type: "string" }] },
-      internalId: { oneOf: [{ type: "number" }, { type: "string" }] },
-      id: { oneOf: [{ type: "number" }, { type: "string" }] },
+      start: { type: ["number", "string"] },
+      end: { type: ["number", "string"] },
+      internalId: { type: ["number", "string"] },
+      id: { type: ["number", "string"] },
       type: { type: "string" },
       properties: { type: "object", additionalProperties: true }
     },
