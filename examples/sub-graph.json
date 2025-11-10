@@ -1,0 +1,106 @@
+{
+    "nodes": [
+        {
+            "internalId": 3588,
+            "id": "6909a42ed2b3e903e38b15ff",
+            "properties": {
+                "outputs": "[]",
+                "creationTimeMS": 1762239534199,
+                "inputs": "[]",
+                "ladderOfDecentDef": "{}",
+                "name": "HOLACRACY_2",
+                "updationTimeMS": 1762239534199,
+                "piUniverseId": "123",
+                "description": "Intelligent agent specializing in end-to-end Holacracy tenant onboarding, from email verification through schema setup",
+                "id": "6909a42ed2b3e903e38b15ff",
+                "label": "AGENT",
+                "contentRef": "https://cdn.gov-cloud.ai/_public/handler/logs/9dc9e5fb-0dc0-4df7-ae52-780723b057f9_$$_V1_4fd496e6-5eae-4537-ba1f-164f9b6dd7211762239534096.yaml"
+            },
+            "labels": [
+                "AGENT"
+            ]
+        },
+        {
+            "internalId": 3589,
+            "id": "6909a43dd2b3e903e38b1600",
+            "properties": {
+                "outputs": "[]",
+                "creationTimeMS": 1762239549467,
+                "descriptionEmbeddings": [],
+                "inputs": "[]",
+                "updationTimeMS": 1762239552833,
+                "description": "This Neuron is responsbile to Create account",
+                "label": "NEURON",
+                "sciences": [
+                    "{GRAPH=6909a440d2b3e903e38b160c, TYPE_THEORY_PLAYBOOK=6909a440d2b3e903e38b1604, CATEGORY_THEORY_PLAYBOOK=6909a440d2b3e903e38b1605, TELEODYNAMICS_PLAYBOOK=6909a440d2b3e903e38b1609, GOVERNANCE=6909a440d2b3e903e38b160b, ECORE_PLAYBOOK=6909a43fd2b3e903e38b1602, CSPN_PLAYBOOK=6909a43fd2b3e903e38b1603, SIMULATION=6909a440d2b3e903e38b160d, CAP_GRAPH_PLAYBOOK=6909a440d2b3e903e38b1608, AUTOPOIESIS_PLAYBOOK=6909a440d2b3e903e38b1607, INTERFACE=6909a440d2b3e903e38b160a, MUTATION=6909a440d2b3e903e38b160e, GRAMMAR=6909a440d2b3e903e38b160f, PLAYBOOK=6909a43fd2b3e903e38b1601, GRAMMAR_PLAYBOOK=6909a440d2b3e903e38b1606, NEURON=6909a43dd2b3e903e38b1600}"
+                ],
+                "neuronType": "CAPABILITY_NEURON",
+                "ladderOfDecentDef": "LadderOfDecentDef(lodType=BO, lodSchemaId=68ac2d044e7cc90774f5db43)",
+                "name": "Account Creation -001",
+                "id": "6909a43dd2b3e903e38b1600",
+                "contentRef": "https://cdn.gov-cloud.ai/_public/handler/logs/d217a063-928f-436d-95fe-9927b4fb2825_$$_V1_06f145a4-18e8-4a96-86d6-1583ee49d1131762239549471.yaml"
+            },
+            "labels": [
+                "NEURON"
+            ]
+        },
+        {
+            "internalId": 3590,
+            "id": "6909a44cd2b3e903e38b1610",
+            "properties": {
+                "outputs": "[]",
+                "creationTimeMS": 1762239564697,
+                "descriptionEmbeddings": [],
+                "inputs": "[]",
+                "updationTimeMS": 1762239567339,
+                "description": "This Neuron is responsbile to Create account",
+                "label": "NEURON",
+                "sciences": [
+                    "{GRAPH=6909a44fd2b3e903e38b161c, TYPE_THEORY_PLAYBOOK=6909a44ed2b3e903e38b1614, CATEGORY_THEORY_PLAYBOOK=6909a44ed2b3e903e38b1615, TELEODYNAMICS_PLAYBOOK=6909a44ed2b3e903e38b1619, GOVERNANCE=6909a44fd2b3e903e38b161b, ECORE_PLAYBOOK=6909a44ed2b3e903e38b1612, CSPN_PLAYBOOK=6909a44ed2b3e903e38b1613, SIMULATION=6909a44fd2b3e903e38b161d, CAP_GRAPH_PLAYBOOK=6909a44ed2b3e903e38b1618, AUTOPOIESIS_PLAYBOOK=6909a44ed2b3e903e38b1617, INTERFACE=6909a44ed2b3e903e38b161a, MUTATION=6909a44fd2b3e903e38b161e, GRAMMAR=6909a44fd2b3e903e38b161f, PLAYBOOK=6909a44ed2b3e903e38b1611, GRAMMAR_PLAYBOOK=6909a44ed2b3e903e38b1616, NEURON=6909a44cd2b3e903e38b1610}"
+                ],
+                "neuronType": "CAPABILITY_NEURON",
+                "ladderOfDecentDef": "LadderOfDecentDef(lodType=BO, lodSchemaId=68ac2d044e7cc90774f5db43)",
+                "name": "Account Creation -002",
+                "id": "6909a44cd2b3e903e38b1610",
+                "contentRef": "https://cdn.gov-cloud.ai/_public/handler/logs/57c63160-abfd-4368-9dfc-ed33742b0eb4_$$_V1_1deb721e-1903-4e57-b5f2-0e9cb990f4421762239564699.yaml"
+            },
+            "labels": [
+                "NEURON"
+            ]
+        }
+    ],
+    "meta": {
+        "nodes": 3,
+        "maxAvailableDepth": 2,
+        "edges": 3
+    },
+    "edges": [
+        {
+            "start": 3588,
+            "internalId": 73756,
+            "end": 3589,
+            "type": "AGENT_HAS_NEURON",
+            "properties": {
+                "createdAt": "2025-11-04T06:59:12.757Z"
+            }
+        },
+        {
+            "start": 3589,
+            "internalId": 73758,
+            "end": 3590,
+            "type": "DEPENDS_ON",
+            "properties": {
+                "createdAt": "2025-11-04T06:59:27.348Z"
+            }
+        },
+        {
+            "start": 3588,
+            "internalId": 73757,
+            "end": 3590,
+            "type": "AGENT_HAS_NEURON",
+            "properties": {
+                "createdAt": "2025-11-04T06:59:27.302Z"
+            }
+        }
+    ]
+}
