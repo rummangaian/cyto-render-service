@@ -7,10 +7,10 @@ import { cytoSnap } from "../core/cyto-snap.js";
 import { frameSvg } from "../core/svg-frame.js";
 
 type Body = {
-  data: ScienceData; // your Science-shaped JSON
-  filePath?: string; // optional, default from env
-  contentTags?: string; // optional, default from env
-  filename?: string; // optional, default generated
+  data: ScienceData; 
+  filePath?: string; 
+  contentTags?: string; 
+  filename?: string; 
 };
 
 export async function postRenderScienceUpload(
@@ -73,7 +73,6 @@ export async function postRenderScienceUpload(
   const response = await res.json();
 
   const cdnUrl =`https://cdn.gov-cloud.ai/${response.cdnUrl}`
-  console.log("cdnUrl",cdnUrl)
 
   return reply.send({
     ok: true,
@@ -84,6 +83,6 @@ export async function postRenderScienceUpload(
     cdnUrl: cdnUrl,
     fileId: response.id,
     fileInfo: response.info,
-    cdn: response, // include full JSON too if needed
+    cdn: response,
   });
 }
