@@ -14,17 +14,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@fastify/sensible": "^6.0.1",
+    "@stereobooster/cyto-nodejs": "0.0.2",
     "fastify": "^4.28.1",
+    "@fastify/sensible": "^6.0.1",
     "pino": "^9.5.0",
-    "zod": "^3.23.8",
-    "cytoscape": "^3.26.0",
-    "cytoscape-svg": "^0.4.0",
-    "cytoscape-dagre": "^2.5.0",
-    "jsdom": "^24.1.0",
-    "canvas": "^2.11.2"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/jsdom": "^27.0.0",
     "@types/node": "^22.9.1",
     "eslint": "^9.13.0",
     "tsx": "^4.19.2",
