@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    {
+      "internalId": 3588,
+      "id": "6909a42ed2b3e903e38b15ff",
+      "properties": { "name": "HOLACRACY_2", "label": "AGENT" }
+    },
+    {
+      "internalId": 3589,
+      "id": "6909a43dd2b3e903e38b1600",
+      "properties": { "name": "Account Creation -001", "label": "NEURON" }
+    },
+    {
+      "internalId": 3590,
+      "id": "6909a44cd2b3e903e38b1610",
+      "properties": { "name": "Account Creation -002", "label": "NEURON" }
+    }
+  ],
+  "edges": [
+    { "start": 3588, "end": 3589, "type": "AGENT_HAS_NEURON" },
+    { "start": 3589, "end": 3590, "type": "DEPENDS_ON" },
+    { "start": 3588, "end": 3590, "type": "AGENT_HAS_NEURON" }
+  ]
+}
