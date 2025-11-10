@@ -1,13 +1,15 @@
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "url";
-import { dirname, resolve } from "node:path";
+import { dirname, resolve, join } from "node:path";
 import { createRequire } from "module";
-const require = createRequire(import.meta.url);
+import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { randomUUID } from "node:crypto";
 
+const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Resolve CLI location. Prefer installed package. Fallback to local bin.
 function resolveCytoBin(): string {
   if (process.env.CYTO_BIN) return process.env.CYTO_BIN;
   try {
@@ -16,28 +18,39 @@ function resolveCytoBin(): string {
     return resolve(__dirname, "../../bin/cyto-nodejs.js");
   }
 }
+
 const executablePath = resolveCytoBin();
 
-// Exact logic kept. Types added only.
-export const cytoSnap = (src: string | object, dst?: string): Promise<string> => {
-  return new Promise((resolvePromise, rejectPromise) => {
+// exact logic preserved: stdin when src is object, use -d when file output requested
+export const cytoSnap = (src: string | object): Promise<string> =>
+  new Promise(async (resolvePromise, rejectPromise) => {
+    const workdir = await mkdtemp(join(tmpdir(), "cyto-"));
+    const dst = join(workdir, `${randomUUID()}.svg`);
+
     const srcStdin = typeof src !== "string";
     const args: string[] = [];
-    let res = "";
     if (!srcStdin) args.push("-s", src as string);
-    if (dst) args.push("-d", dst);
+    args.push("-d", dst);
 
-    const bin = spawn(executablePath, args, { windowsHide: true });
+    const bin = spawn(process.execPath, [executablePath, ...args], { windowsHide: true });
 
-    bin.stdout.on("data", (data) => (res = data.toString()));
-    bin.stderr.on("data", (data) => rejectPromise(`stderr: ${data}`));
-    bin.on("close", (code) => {
-      if (code === 0) resolvePromise(res);
-      else rejectPromise(`child process exited with code ${code}`);
+    let stderr = "";
+    bin.stderr.on("data", d => (stderr += d.toString()));
+
+    bin.on("close", async (code) => {
+      try {
+        if (code !== 0) return rejectPromise(`child process exited with code ${code}. ${stderr}`);
+        const svg = await readFile(dst, "utf8");
+        resolvePromise(svg);
+      } catch (e) {
+        rejectPromise(`failed to read svg: ${(e as Error).message}. ${stderr}`);
+      } finally {
+        await rm(workdir, { recursive: true, force: true }).catch(() => {});
+      }
     });
+
     if (srcStdin) {
       bin.stdin.write(JSON.stringify(src));
       bin.stdin.end();
     }
   });
-};
